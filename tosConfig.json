@@ -1,0 +1,18 @@
+{
+  "tos_items": [
+    {
+      "app_version": "1.2.3.0",
+      "tos_version": 3
+    },
+    {
+      "app_version_range": {
+        "min_app_version": "1.2.3.1",
+        "max_app_version": "1.2.3.*"
+      },
+      "tos_url": "https://www.foo.bar",
+      "tos_version": 3.2
+    }
+  ],
+  "default_tos_url": "https://io.italia.it/app-content/tos_privacy.html",
+  "default_tos_version": 4.5
+}
