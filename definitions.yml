@@ -1,0 +1,860 @@
+swagger: "2.0"
+info:
+  version: "0.2"
+paths:
+definitions:
+  Service:
+    type: object
+    required:
+      - scope
+    properties:
+      description:
+        type: string
+      web_url:
+        type: string
+      support_url:
+        type: string
+      app_ios:
+        type: string
+      app_android:
+        type: string
+      tos_url:
+        type: string
+      privacy_url:
+        type: string
+      address:
+        type: string
+      phone:
+        type: string
+      email:
+        type: string
+      pec:
+        type: string
+      cta:
+        type: string
+      token_name:
+        type: string
+      scope:
+        type: string
+        x-extensible-enum:
+          - NATIONAL
+          - LOCAL
+  Municipality:
+    type: object
+    required:
+      - codiceRegione
+      - codiceProvincia
+      - denominazione
+      - denominazioneInItaliano
+      - denominazioneRegione
+      - siglaProvincia
+    properties:
+      codiceRegione:
+        type: string
+      codiceProvincia:
+        type: string
+      denominazione:
+        type: string
+      denominazioneInItaliano:
+        type: string
+      denominazioneRegione:
+        type: string
+      siglaProvincia:
+        type: string
+  ContextualHelp:
+    type: object
+    required:
+      - version
+      - it
+      - en
+    properties:
+      version:
+        type: number
+      it:
+        $ref: "#/definitions/ContextualHelpData"
+      en:
+        $ref: "#/definitions/ContextualHelpData"
+  ContextualHelpData:
+    type: object
+    required:
+      - idps
+      - screens
+    properties:
+      idps:
+        $ref: "#/definitions/IdpData"
+      screens:
+        $ref: "#/definitions/ScreensCHData"
+  ScreensCHData:
+    type: array
+    items:
+      $ref: "#/definitions/ScreenCHData"
+  ScreenCHData:
+    type: object
+    required:
+      - route_name
+      - title
+      - content
+    properties:
+      route_name:
+        type: string
+      title:
+        type: string
+      content:
+        type: string
+      faqs:
+        type: array
+        items:
+          $ref: "#/definitions/Faq"
+  IdpData:
+    type: object
+    properties:
+      arubaid:
+        $ref: "#/definitions/Idp"
+      ehtid:
+        $ref: "#/definitions/Idp"
+      infocamereid:
+        $ref: "#/definitions/Idp"
+      infocertid:
+        $ref: "#/definitions/Idp"
+      intesiid:
+        $ref: "#/definitions/Idp"
+      lepidaid:
+        $ref: "#/definitions/Idp"
+      namirialid:
+        $ref: "#/definitions/Idp"
+      posteid:
+        $ref: "#/definitions/Idp"
+      sielteid:
+        $ref: "#/definitions/Idp"
+      spiditalia:
+        $ref: "#/definitions/Idp"
+      teamsystemid:
+        $ref: "#/definitions/Idp"
+      timid:
+        $ref: "#/definitions/Idp"
+      cie:
+        $ref: "#/definitions/Idp"
+      test:
+        $ref: "#/definitions/Idp"
+  Idp:
+    type: object
+    required:
+      - description
+      - recover_password
+      - phone
+      - web_site
+    properties:
+      description:
+        type: string
+      email:
+        type: string
+      helpdesk_form:
+        type: string
+      phone:
+        type: string
+      phone_international:
+        type: string
+      web_site:
+        type: string
+      recover_username:
+        type: string
+      recover_password:
+        type: string
+      recover_emergency_code:
+        type: string
+  BonusesAvailable:
+    type: array
+    items:
+      $ref: "#/definitions/BonusAvailable"
+  BonusAvailable:
+    type: object
+    required:
+      - id_type
+      - is_active
+      - valid_from
+      - valid_to
+      - it
+      - en
+    properties:
+      id_type:
+        type: number
+      service_id:
+        type: string
+      is_active:
+        type: boolean
+      hidden:
+        type: boolean
+      cover:
+        type: string
+      sponsorship_cover:
+        type: string
+      sponsorship_description:
+        type: string
+      it:
+        $ref: "#/definitions/BonusAvailableContent"
+      en:
+        $ref: "#/definitions/BonusAvailableContent"
+      valid_from:
+        $ref: "#/definitions/Timestamp"
+      valid_to:
+        $ref: "#/definitions/Timestamp"
+      visibility:
+        $ref: "#/definitions/BonusVisibility"
+  BonusAvailableContent:
+    type: object
+    required:
+      - name
+      - title
+      - subtitle
+      - content
+    properties:
+      name:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      subtitle:
+        type: string
+      content:
+        type: string
+      tos_url:
+        type: string
+      urls:
+        type: array
+        items:
+          $ref: "#/definitions/BonusUrl"
+  Timestamp:
+    $ref: "https://raw.githubusercontent.com/pagopa/io-functions-commons/v25.5.0/openapi/definitions.yaml#/Timestamp"
+  BonusVisibility:
+    type: string
+    x-extensible-enum:
+      - visible
+      - hidden
+      - experimental
+    example: visible
+  BonusUrl:
+    type: object
+    required:
+      - name
+      - url
+    properties:
+      name:
+        type: string
+      url:
+        type: string
+  Faq:
+    type: object
+    required:
+      - title
+      - body
+    properties:
+      title:
+        type: string
+      body:
+        type: string
+  SpidIdps:
+    type: object
+    required:
+      - items
+    properties:
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/SpidIdp"
+  SpidIdp:
+    type: object
+    description: Entry used to generate the list of IDPs available to select on the login flow.
+    required:
+      - id
+      - name
+      - logo
+      - profileUrl
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      logo:
+        type: string
+      profileUrl:
+        type: string
+      isTestIdp:
+        type: boolean
+  BackendStatus:
+    type: object
+    description: "A complex object representing multiple things: backend status, section status (a.k.a IO-App banners), remote config"
+    required:
+      - is_alive
+      - message
+      - sections
+      - config
+    properties:
+      config:
+        $ref: "#/definitions/Config"
+      sections:
+        $ref: "#/definitions/Sections"
+      is_alive:
+        type: boolean
+      message:
+        $ref: "#/definitions/BackendStatusMessage"
+  BackendStatusMessage:
+    type: object
+    description: The message shown in IO-App when the backend is not alive
+    required:
+      - it-IT
+      - en-EN
+    properties:
+      it-IT:
+        type: string
+      en-EN:
+        type: string
+  Sections:
+    type: object
+    description: The status of the app sections
+    required:
+      - bancomat
+      - bancomatpay
+      - cashback
+      - cobadge
+      - credit_card
+      - paypal
+      - digital_payments
+      - email_validation
+      - euCovidCert
+      - ingress
+      - login
+      - messages
+      - satispay
+      - services
+      - wallets
+      - favourite_language
+      - app_update_required
+      - cgn
+      - fims
+    properties:
+      bancomat:
+        $ref: "#/definitions/SectionStatus"
+      bancomatpay:
+        $ref: "#/definitions/SectionStatus"
+      cashback:
+        $ref: "#/definitions/SectionStatus"
+      cobadge:
+        $ref: "#/definitions/SectionStatus"
+      credit_card:
+        $ref: "#/definitions/SectionStatus"
+      paypal:
+        $ref: "#/definitions/SectionStatus"
+      digital_payments:
+        $ref: "#/definitions/SectionStatus"
+      email_validation:
+        $ref: "#/definitions/SectionStatus"
+      euCovidCert:
+        $ref: "#/definitions/SectionStatus"
+      ingress:
+        $ref: "#/definitions/SectionStatus"
+      login:
+        $ref: "#/definitions/SectionStatus"
+      messages:
+        $ref: "#/definitions/SectionStatus"
+      satispay:
+        $ref: "#/definitions/SectionStatus"
+      services:
+        $ref: "#/definitions/SectionStatus"
+      wallets:
+        $ref: "#/definitions/SectionStatus"
+      favourite_language:
+        $ref: "#/definitions/SectionStatus"
+      app_update_required:
+        $ref: "#/definitions/SectionStatus"
+      cgn:
+        $ref: "#/definitions/SectionStatus"
+      fims:
+        $ref: "#/definitions/SectionStatus"
+      cdc:
+        $ref: "#/definitions/SectionStatus"
+  SectionStatus:
+    type: object
+    description: The status of a specific app section
+    required:
+      - is_visible
+      - level
+      - message
+    properties:
+      badge:
+        $ref: "#/definitions/BackendStatusMessage"
+      web_url:
+        $ref: "#/definitions/BackendStatusMessage"
+      is_visible:
+        type: boolean
+      message:
+        $ref: "#/definitions/BackendStatusMessage"
+      level:
+        type: string
+        x-extensible-enum:
+          - critical
+          - warning
+          - normal
+  Config:
+    type: object
+    description: A remote config to enable/disable specific app features
+    required:
+      - bpd
+      - bpd_ranking
+      - bpd_ranking_v2
+      - cgn_merchants_v2
+      - assistanceTool
+      - paypal
+      - bancomatPay
+      - cgn
+      - uaDonations
+      - fims
+      - premiumMessages
+      - cdc
+      - barcodesScanner
+      - fci
+      - idPay
+      - lollipop
+      - pn
+      - payments
+    properties:
+      payments:
+        $ref: "#/definitions/PaymentsConfig"
+      bpd:
+        $ref: "#/definitions/BpdConfig"
+      bpd_ranking:
+        description: "bpd_ranking is legacy, don't use it anymore see https://www.pivotaltracker.com/story/show/176498731"
+        type: boolean
+      bpd_ranking_v2:
+        type: boolean
+      cgn_merchants_v2:
+        type: boolean
+        description: "This has been deprecated since the introduction of CgnConfig definition"
+      assistanceTool:
+        $ref: "#/definitions/AssistanceToolConfig"
+      paypal:
+        $ref: "#/definitions/PaypalConfig"
+      bancomatPay:
+        $ref: "#/definitions/BancomatPayConfig"
+      cgn:
+        $ref: "#/definitions/CgnConfig"
+      uaDonations:
+        $ref: "#/definitions/UaDonationsConfig"
+      fims:
+        $ref: "#/definitions/FimsConfig"
+      premiumMessages:
+        $ref: "#/definitions/PremiumMessagesConfig"
+      cdc:
+        $ref: "#/definitions/CdcConfig"
+      barcodesScanner:
+        $ref: "#/definitions/BarcodesScannerConfig"
+      fci:
+        $ref: "#/definitions/FciConfig"
+      idPay:
+        $ref: "#/definitions/IdPayConfig"
+      lollipop:
+        $ref: "#/definitions/LollipopConfig"
+      pn:
+        $ref: "#/definitions/PnConfig"
+      fastLogin:
+        $ref: "#/definitions/FastLoginConfig"
+      nativeLogin:
+        $ref: "#/definitions/NativeLoginConfig"
+      emailUniquenessValidation:
+        $ref: "#/definitions/EmailUniquenessConfig"
+  BpdConfig:
+    type: object
+    description: A specific config for BPD bonus
+    required:
+      - enroll_bpd_after_add_payment_method
+      - program_active
+      - opt_in_payment_methods
+      - opt_in_payment_methods_v2
+    properties:
+      enroll_bpd_after_add_payment_method:
+        description: "If true and the user is not enrolled to the cashback, the user is asked to activate the cashback after adding a new payment method"
+        type: boolean
+      program_active:
+        description: "If true, the cashback program is active and all the related in app functionalities are enabled"
+        type: boolean
+      opt_in_payment_methods:
+        description: "DEPRECATED This field would be considered only by app version prior to 2.19.0.1 and should be kept in false value"
+        type: boolean
+        deprecated: true
+      opt_in_payment_methods_v2:
+        description: "If true, when the user enter in the wallet the information wall regarding the opt-in of the payment methods is shown starting from app version 2.19.0.1"
+        type: boolean
+  PaypalConfig:
+    type: object
+    description: "dedicated config for the Paypal payment method"
+    required:
+      - enabled
+    properties:
+      enabled:
+        type: boolean
+        description: "If true paypal is available in those app that support it"
+  BancomatPayConfig:
+    type: object
+    description: "dedicated config for the BancomatPay payment method"
+    required:
+      - onboarding
+      - payment
+      - display
+    properties:
+      display:
+        type: boolean
+        description: "If true BPay can be showed in the wallet section"
+      onboarding:
+        type: boolean
+        description: "If true BPay can be added in the user's wallet"
+      payment:
+        type: boolean
+        description: "If true BPay can be used to pay"
+  CgnConfig:
+    type: object
+    description: "dedicated config for the CGN app flow"
+    required:
+      - enabled
+      - merchants_v2
+    properties:
+      enabled:
+        type: boolean
+        description: "If true CGN app components and logic is available in those app that support it"
+      merchants_v2:
+        type: boolean
+        description: "If true the merchants search screen will display one tab per merchant type (online or local) NOTE: this version may still be under development"
+  FimsConfig:
+    type: object
+    description: "dedicated config for the FIMS (Federated Identity Management System) feature"
+    required:
+      - enabled
+      - domain
+    properties:
+      enabled:
+        type: boolean
+        description: "If true FIMS feature is available in those app that support it"
+      domain:
+        type: string
+        description: "This is the url that will be used to store the session cookie inside the app dedicated webview"
+  AssistanceToolConfig:
+    type: object
+    description: "A specific config for the assistance tool"
+    required:
+      - tool
+    properties:
+      tool:
+        type: string
+        enum: [none, zendesk, instabug, web]
+        description: "none: also used as default, the assistance is not visible; zendesk: the assistance is managed with zendesk; instabug: the assistance is managed with instabug; web: the assistance is managed with a web form;"
+  Zendesk:
+    type: object
+    description: "A specific config for Zendesk"
+    required:
+      - panicMode
+    properties:
+      panicMode:
+        type: boolean
+        description: "If true is not possible open a ticket"
+      zendeskCategories:
+        $ref: "#/definitions/ZendeskCategories"
+  ZendeskCategories:
+    type: object
+    description: "Map the id and the categories created in Zendesk"
+    required:
+      - id
+      - categories
+    properties:
+      id:
+        type: string
+        description: "Identify the category field in Zendesk"
+      categories:
+        type: array
+        items:
+          $ref: "#/definitions/ZendeskCategory"
+        description: "The array of categories set in Zendesk"
+  ZendeskDescriptionMessage:
+    type: object
+    description: The category description shown in IO-App
+    required:
+      - it-IT
+      - en-EN
+    properties:
+      it-IT:
+        type: string
+      en-EN:
+        type: string
+  ZendeskCategory:
+    type: object
+    description: "Represents a category in Zendesk. It is identified by a value, it has an IT and an EN description and can have an array of sub-categories"
+    required:
+      - value
+      - description
+    properties:
+      value:
+        type: string
+        description: "Map the value set in Zendesk"
+      description:
+        $ref: "#/definitions/ZendeskDescriptionMessage"
+      zendeskSubCategories:
+        $ref: "#/definitions/ZendeskSubCategories"
+  ZendeskSubCategories:
+    type: object
+    description: "The array of the possible sub-categories set in Zendesk for the specific category identified by an id"
+    required:
+      - id
+      - subCategories
+    properties:
+      id:
+        type: string
+        description: "Identify the sub-category field in Zendesk"
+      subCategories:
+        type: array
+        items:
+          $ref: "#/definitions/ZendeskSubCategory"
+  ZendeskSubCategory:
+    type: object
+    description: "Represents a sub-category in Zendesk. Is identified by an id and a value, has an IT and an EN description"
+    required:
+      - value
+      - description
+    properties:
+      value:
+        type: string
+        description: "Map the value setted in Zendesk"
+      description:
+        $ref: "#/definitions/ZendeskDescriptionMessage"
+  VersionInfo:
+    type: object
+    description: "Information related to the app version"
+    required:
+      - min_app_version
+      - latest_released_app_version
+      - rollout_app_version
+    properties:
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+      min_app_version_pagopa:
+        $ref: "#/definitions/VersionPerPlatform"
+      latest_released_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+      rollout_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+  VersionPerPlatform:
+    type: object
+    description: "Associate an app version with a platform "
+    required:
+      - ios
+      - android
+    properties:
+      ios:
+        type: string
+        pattern: '^\\d+.\\d+.\\d+(.\\d+)?$'
+        description: "The iOS version"
+      android:
+        type: string
+        pattern: '^\\d+.\\d+.\\d+(.\\d+)?$'
+        description: "The Android version"
+  UaDonationsConfig:
+    type: object
+    description: "dedicated config for the Ukrainian donation app flow"
+    required:
+      - enabled
+      - banner
+    properties:
+      enabled:
+        type: boolean
+        description: "If true Ukrainian donations app components and logic is available in those app that support it"
+      banner:
+        $ref: "#/definitions/UaDonationsBanner"
+  UaDonationsBanner:
+    type: object
+    description: "Configuration of the Ukrainian donations banner shown in the IO app message section"
+    required:
+      - visible
+      - url
+      - description
+    properties:
+      visible:
+        type: boolean
+        description: "If true the Ukrainian donations banner is visible to the user"
+      description:
+        $ref: "#/definitions/UaDonationsBannerDescription"
+      url:
+        type: string
+        description: "The URL that must be loaded from the app's webview"
+  UaDonationsBannerDescription:
+    type: object
+    description: "The text shown in the Ukrainian donations banner"
+    required:
+      - it-IT
+      - en-EN
+    properties:
+      it-IT:
+        type: string
+      en-EN:
+        type: string
+  PremiumMessagesConfig:
+    type: object
+    description: "A configuration for the Premium Messages feature"
+    required:
+      - opt_in_out_enabled
+    properties:
+      opt_in_out_enabled:
+        type: boolean
+        description: "If true, an opt-in/out screen for the Premium Messages feature will be showed to the user while onboarding and in the settings"
+  CdcConfig:
+    type: object
+    description: "A configuration for the carta della cultura feature"
+    required:
+      - enabled
+    properties:
+      enabled:
+        type: boolean
+        description: "If true, are visible the entry points: bonus menu, carousel, service page cta, and message cta"
+  BarcodesScannerConfig:
+    type: object
+    description: "A configuration for the barcodes scanner in the payment section"
+    required:
+      - dataMatrixPosteEnabled
+    properties:
+      dataMatrixPosteEnabled:
+        type: boolean
+        description: "If true, a Poste Data Matrix can be scansioned to make a payment"
+  LollipopConfig:
+    type: object
+    description: "A configuration for the LolliPOP feature"
+    required:
+      - enabled
+    properties:
+      enabled:
+        type: boolean
+        description: "If true, a crypto key pair is generated by the device"
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+        description: "If min app version supported, a crypto key pair is generated by the device"
+  FastLoginConfig:
+    type: object
+    description: "A configuration for the fast login feature"    
+    properties:      
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+        description: "If min app version supported, the fast login feature is enabled"
+      opt_in:
+        type: object
+        description: "A configuration for the fast login opt-in feature"
+        properties:
+          min_app_version:
+            $ref: "#/definitions/VersionPerPlatform"
+            description: "If min app version supported, the fast login opt-in feature is enabled"
+  NativeLoginConfig:
+    type: object
+    description: "A configuration to let users authenticate through native components"    
+    properties:      
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+        description: "If min app version supported, the native login is enabled"
+  EmailUniquenessConfig:
+    type: object
+    description: "A configuration to force email uniqueness validation"    
+    properties:      
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+        description: "If min app version supported, the mandatory email uniqueness validation is enabled"
+  FciConfig:
+    type: object
+    description: "A configuration for the Firma con IO feature"
+    required:
+      - min_app_version
+      - enabled
+    properties:
+      enabled:
+        type: boolean
+        description: "If true, the app can activate the Firma con IO service and digitally signs documents"
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+        description: "If min app version supported, the test user (signer) can digitally signs documents"
+  IdPayConfig:
+    type: object
+    description: "A configuration for the IdPay feature"
+    required:
+      - min_app_version
+    properties:
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+        description: "If min app version supported, the test user can onboard, configure and monitor an IdPay initiative"
+  PnConfig:
+    type: object
+    description: "A configuration for the PN feature"
+    required:
+      - enabled
+      - min_app_version
+      - frontend_url
+      - optInServiceId
+    properties:
+      enabled:
+        type: boolean
+        description: "If true, the app can activate the PN service and open messages (aka avvisi di cortesia) from PN"
+      min_app_version:
+        $ref: "#/definitions/VersionPerPlatform"
+        description: "If min app version supported, the user can activate/deactivate the PN service and open messages (aka avvisi di cortesia) from PN"
+      frontend_url:
+        type: string
+        description: "The URL of the PN web frontend"
+      optInServiceId:
+        type: string
+        description: "The ID of the standard PN service that sends the OptIn message"
+  PaymentsConfig:
+    type: object
+    description: "Configuration data related to payments"
+    properties:
+      preferredPspsByOrigin:
+        $ref: "#/definitions/PreferredPspsByOrigin"
+  PreferredPspsByOrigin:
+    type: object
+    properties:
+      "poste_datamatrix_scan":
+        type: array
+        items:
+          type: string
+  TosConfig: 
+    type: object
+    description: "Configuration data related to Terms of Service"
+    required: 
+      - default_tos_version
+      - default_tos_url
+    properties: 
+      tos_items: 
+        type: array
+        items: 
+          $ref: "#/definitions/TosConfigItem"
+      default_tos_version: 
+        type: number
+      default_tos_url: 
+        type: string
+  TosConfigItem:
+    type: object
+    description: "Configuration item for Terms of Service"
+    required:
+      - tos_version
+    properties: 
+      app_version:
+        $ref: "#/definitions/TosVersion"
+      app_version_range:
+        type: object
+        required:
+          - min_app_version
+          - max_app_version
+        properties:
+          min_app_version:
+            $ref: "#/definitions/TosVersion"
+          max_app_version:
+            $ref: "#/definitions/TosVersion"
+      tos_version: 
+        type: number
+      tos_url: 
+        type: string
+  TosVersion:
+    type: string
+    description: "Tos version format"  
+    example: "1.0.0 or 1.2.3.* or 1.2.3.4"  
+    pattern: '^\\d+.\\d+.\\d+(.[\\d*]+)?$'
