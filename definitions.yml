@@ -858,6 +858,6 @@ definitions:
         type: string
   AppVersion:
     type: string
-    description: "Tos version format"  
+    description: "App version format"  
     example: "1.0.0 or 1.2.3.* or 1.2.3.4"  
     pattern: '^\\d+.\\d+.\\d+(.[\\d*]+)?$'
