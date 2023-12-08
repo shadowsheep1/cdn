@@ -841,7 +841,7 @@ definitions:
       - tos_version
     properties: 
       app_version:
-        $ref: "#/definitions/TosVersion"
+        $ref: "#/definitions/AppVersion"
       app_version_range:
         type: object
         required:
@@ -849,14 +849,14 @@ definitions:
           - max_app_version
         properties:
           min_app_version:
-            $ref: "#/definitions/TosVersion"
+            $ref: "#/definitions/AppVersion"
           max_app_version:
-            $ref: "#/definitions/TosVersion"
+            $ref: "#/definitions/AppVersion"
       tos_version: 
         type: number
       tos_url: 
         type: string
-  TosVersion:
+  AppVersion:
     type: string
     description: "Tos version format"  
     example: "1.0.0 or 1.2.3.* or 1.2.3.4"  
